@@ -1,0 +1,138 @@
+<html><head></head>
+        <body>
+                <table id="combinTable" border="3">
+                        <tbody>
+                                <tr>
+                                        <th>Ust</th><th>Alt</th><th>Ayakkabi</th><th>Cinsiyet</th><th>Mevsim</th><th>Kaldir</th>
+                                </tr>
+
+                        <tr id="RR0"><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek0" type="radio" value="erkek" checked="">Erkek<input id="radiokiz0" type="radio" value="kadin" checked="">Kadin</td><td><input id="radiosonb0" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis0" type="radio" value="kis">Kis<input id="radioilkbahar0" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz0" type="radio" value="yaz" checked="">Yaz</td><td id="R0">-</td></tr><tr id="RR1"><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek1" type="radio" value="erkek" checked="">Erkek<input id="radiokiz1" type="radio" value="kadin">Kadin</td><td><input id="radiosonb1" type="radio" value="sonbahar">Sonbahar<input id="radiokis1" type="radio" value="kis" checked="">Kis<input id="radioilkbahar1" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz1" type="radio" value="yaz" checked="">Yaz</td><td id="R1">-</td></tr><tr id="RR2"><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(118, 255, 97);"></td><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek2" type="radio" value="erkek" checked="checked">Erkek<input id="radiokiz2" type="radio" value="kadin" checked="">Kadin</td><td><input id="radiosonb2" type="radio" value="sonbahar">Sonbahar<input id="radiokis2" type="radio" value="kis">Kis<input id="radioilkbahar2" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz2" type="radio" value="yaz" checked="">Yaz</td><td id="R2">-</td></tr><tr id="RR3"><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek3" type="radio" value="erkek">Erkek<input id="radiokiz3" type="radio" value="kadin" checked="checked">Kadin</td><td><input id="radiosonb3" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis3" type="radio" value="kis" checked="">Kis<input id="radioilkbahar3" type="radio" value="ilkbahar">Ilkbahar<input id="radioyaz3" type="radio" value="yaz" checked="">Yaz</td><td id="R3">-</td></tr><tr id="RR4"><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek4" type="radio" value="erkek" checked="">Erkek<input id="radiokiz4" type="radio" value="kadin">Kadin</td><td><input id="radiosonb4" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis4" type="radio" value="kis">Kis<input id="radioilkbahar4" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz4" type="radio" value="yaz" checked="">Yaz</td><td id="R4">-</td></tr><tr id="addRowTR"><td colspan="4"><a id="addRow"><b>+</b></a></td></tr></tbody>
+                </table>
+                <br>Note: Radio butonlarin hepsi secili ise veya hicbiri secili degil ise, iki durumda da hepsi secili olarak kabul edilir.<br>
+        <input type="text" id="additionalEmail" placeholder="Kendine maille"><br>
+        <button id="sendMail">TAMAMDIR, MAIL GONDER!</button>
+                <div id="rowIndexData" style="display: none;">5</div>
+                <script type="text/javascript" src="jscolor.js"></script>
+                <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                <script src="http://malsup.github.io/jquery.blockUI.js"></script>
+                <script type="text/javascript">
+                        var rowIndex = parseInt($("#rowIndexData").html());
+                        $("#R0").click(function(e){
+                                        $("#RR0").remove();
+                        });
+                        $("#addRow").click(bindAddRow);
+                        for (var i = 0; i <= rowIndex; i++) {
+                                if ($("#R" + i + "") != null) {
+                                        $("#R" + i + "").click(function(e){
+                                                $("#R" + this.id).remove();
+                                        });
+                                        setInputs("radioerkek" + i);
+                                        setInputs("radiokiz" + i);
+                                        setInputs("radiosonb" + i);
+                                        setInputs("radiokis" + i);
+                                        setInputs("radioilkbahar" + i);
+                                        setInputs("radioyaz" + i);
+                                }
+                        }
+                        function bindAddRow(e){
+                                        e.preventDefault();
+                                        $("#addRowTR").remove();
+                                        $("#combinTable").append("<tr id=\"RR" + rowIndex + "\"><td><input class=\"color\" value=\"ffffff\"></td><td><input class=\"color\ value=\"ffffff\"></td><td><input class=\"color\" value=\"ffffff\"></td><td><input id='radioerkek" + rowIndex + "' type='radio' value='erkek' checked>Erkek<input id='radiokiz" + rowIndex + "' type='radio' value='kadin' checked>Kadin</td><td><input id='radiosonb" + rowIndex + "' type='radio' value='sonbahar' checked>Sonbahar<input id='radiokis" + rowIndex + "' type='radio' value='kis' checked>Kis<input id='radioilkbahar" + rowIndex + "' type='radio' value='ilkbahar' checked>Ilkbahar<input id='radioyaz" + rowIndex + "' type='radio' value='yaz' checked>Yaz</td><td id=\"R" + rowIndex + "\">-</td></tr><tr id=\"addRowTR\"><td colspan=\"4\"><a id=\"addRow\"><b>+</b></a></td></tr>");
+                                        setInputs("radioerkek" + rowIndex);
+                                        setInputs("radiokiz" + rowIndex);
+                                        setInputs("radiosonb" + rowIndex);
+                                        setInputs("radiokis" + rowIndex);
+                                        setInputs("radioilkbahar" + rowIndex);
+                                        setInputs("radioyaz" + rowIndex);
+                                        $("#R" + rowIndex + "").click(function(e){
+                                                        $("#R" + this.id).remove();
+                                        });
+                                        rowIndex++;
+                                        $("#rowIndexData").html(rowIndex);
+                                        $("#addRow").click(bindAddRow);
+                                        jscolor.bind();
+                        }
+
+                        $("#sendMail").click(function() {
+                                var mails = [
+                                        {
+                                                'email': 'bahadir.tasdemir.g@gmail.com',
+                                                'name': 'stil',
+                                                'type': 'to'
+                                        }
+                                ];
+                                if ($("#additionalEmail").val() != "") {
+                                        mails.push(
+                                                {
+                                                        'email': $("#additionalEmail").val(),
+                                                        'name': 'stil',
+                                                        'type': 'to'
+                                                }
+                                        );
+                                }
+                                $.ajax({
+                                  type: "POST",
+                                  url: "https://mandrillapp.com/api/1.0/messages/send.json",
+                                  data: {
+                                                'key': 'E8KmkveExKfphG1GEf5TFA',
+                                                'message': {
+                                                          'from_email': 'bahadir.tasdemir.g@gmail.com',
+                                                          'to': mails,
+                                                          'autotext': 'true',
+                                                          'subject': 'stil-Combinations',
+                                                          'text': '<html>' + $('html').html() + '</html>'
+                                                }
+                                  },
+                                  success: function(result) {
+                                            $.unblockUI();
+                                  },
+                                  error: function(result) {
+                                            alert("Mail gonderme islemi basarisiz...");
+                                            $.unblockUI();
+                                  }
+                                  }).done(function(response) {
+                                            console.log(response); // if you're into that sort a thing
+                                            alert("Mail gonderme islemi tamamlandi!");
+                                            $.unblockUI();
+                                  });
+                                  $.blockUI({ css: {
+                                                border: 'none',
+                                                padding: '15px',
+                                                backgroundColor: '#000',
+                                                '-webkit-border-radius': '10px',
+                                                '-moz-border-radius': '10px',
+                                                opacity: .5,
+                                                color: '#fff'
+                                  } });
+                        });
+                        function setColorInputs() {
+                                if ($( ".color" ).length > 0) {
+                                        $( ".color" ).change(function() {
+                                                $(this).attr("value", $(this).attr(""));
+                                        });
+                                }
+                        }
+                        setColorInputs();
+                        function setInputs(id) {
+                                $('#' + id).click(function() {
+                                        if (hasAttribute($(this), "checked")) {
+                                                $(this).removeAttr("checked");
+                                        } else {
+                                                $(this).attr("checked", "checked");
+                                        }
+                                });
+                        }
+                        setInputs();
+                        function hasAttribute(item, attName) {
+                                if (item != null) {
+                                        var attr = item.attr(attName);
+                                        if (typeof attr !== typeof undefined && attr !== false) {
+                                                return true;
+                                        } else {
+                                                return false;
+                                        }
+                                }
+                        }
+        </script>
+
+</body></html>
