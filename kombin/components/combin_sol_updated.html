@@ -1,0 +1,229 @@
+<html><head></head>
+        <body>
+                <table id="combinTable" border="3">
+                        <tbody>
+                                <tr id="tableheader">
+                                        <th>Ust</th><th>Alt</th><th>Ayakkabi</th><th>Cinsiyet</th><th>Mevsim</th><th>Kaldir</th>
+                                </tr>
+
+                        <tr id="RR0"><td><input id="shirtColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="pantsColor" class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="shoeColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek0" type="radio" value="erkek" checked="">Erkek<br><input id="radiokiz0" type="radio" value="kadin" checked="">Kadin</td><td><input id="radiosonb0" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis0" type="radio" value="kis" checked="">Kis<br><input id="radioilkbahar0" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz0" type="radio" value="yaz" checked="">Yaz</td><td id="R0">-</td></tr><tr id="RR1"><td><input id="shirtColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="pantsColor" class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="shoeColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek1" type="radio" value="erkek" checked="">Erkek<br><input id="radiokiz1" type="radio" value="kadin" checked="">Kadin</td><td><input id="radiosonb1" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis1" type="radio" value="kis" checked="">Kis<br><input id="radioilkbahar1" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz1" type="radio" value="yaz" checked="">Yaz</td><td id="R1">-</td></tr><tr id="RR2"><td><input id="shirtColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="pantsColor" class="color value=" ffffff"="" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="shoeColor" class="color" value="ffffff" autocomplete="off" style="color: rgb(0, 0, 0); background-image: none; background-color: rgb(255, 255, 255);"></td><td><input id="radioerkek2" type="radio" value="erkek" checked="">Erkek<br><input id="radiokiz2" type="radio" value="kadin" checked="">Kadin</td><td><input id="radiosonb2" type="radio" value="sonbahar" checked="">Sonbahar<input id="radiokis2" type="radio" value="kis" checked="">Kis<br><input id="radioilkbahar2" type="radio" value="ilkbahar" checked="">Ilkbahar<input id="radioyaz2" type="radio" value="yaz" checked="">Yaz</td><td id="R2">-</td></tr><tr id="addRowTR"><td colspan="6"><a id="addRow"><b>+</b></a></td></tr></tbody>
+                </table>
+                <br>Note: Radio butonlarin hepsi secili ise veya hicbiri secili degil ise, iki durumda da hepsi secili olarak kabul edilir.<br>
+        <input type="text" id="additionalEmail" placeholder="Kendine maille"><br>
+                <input type="text" id="lasDataId" placeholder="Son kaldigin data id'sini gir"><br>
+        <button id="sendMail">TAMAMDIR, MAIL GONDER!</button>
+                <button id="sendMailData">DATAYI MAIL GONDER!</button>
+                <div id="rowIndexData" style="display: none;">3</div>
+                <script type="text/javascript" src="jscolor.js"></script>
+                <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                <script src="http://malsup.github.io/jquery.blockUI.js"></script>
+                <script type="text/javascript">
+                        var rowIndex = parseInt($("#rowIndexData").html());
+
+                        $("#R0").click(function(e){
+                                        $("#RR0").remove();
+                        });
+                        $("#addRow").click(bindAddRow);
+                        for (var i = 0; i <= rowIndex; i++) {
+                                if ($("#R" + i + "") != null) {
+                                        $("#R" + i + "").click(function(e){
+                                                $("#R" + this.id).remove();
+                                        });
+                                        setInputs("radioerkek" + i);
+                                        setInputs("radiokiz" + i);
+                                        setInputs("radiosonb" + i);
+                                        setInputs("radiokis" + i);
+                                        setInputs("radioilkbahar" + i);
+                                        setInputs("radioyaz" + i);
+                                }
+                        }
+                        function bindAddRow(e){
+                                        e.preventDefault();
+                                        $("#addRowTR").remove();
+                                        $("#combinTable").append("<tr id=\"RR" + rowIndex + "\"><td><input id='shirtColor' class=\"color\" value=\"ffffff\"></td><td><input id='pantsColor' class=\"color\ value=\"ffffff\"></td><td><input id='shoeColor' class=\"color\" value=\"ffffff\"></td><td><input id='radioerkek" + rowIndex + "' type='radio' value='erkek' checked>Erkek<br><input id='radiokiz" + rowIndex + "' type='radio' value='kadin' checked>Kadin</td><td><input id='radiosonb" + rowIndex + "' type='radio' value='sonbahar' checked>Sonbahar<input id='radiokis" + rowIndex + "' type='radio' value='kis' checked>Kis<br><input id='radioilkbahar" + rowIndex + "' type='radio' value='ilkbahar' checked>Ilkbahar<input id='radioyaz" + rowIndex + "' type='radio' value='yaz' checked>Yaz</td><td id=\"R" + rowIndex + "\">-</td></tr><tr id=\"addRowTR\"><td colspan=\"6\"><a id=\"addRow\"><b>+</b></a></td></tr>");
+                                        setInputs("radioerkek" + rowIndex);
+                                        setInputs("radiokiz" + rowIndex);
+                                        setInputs("radiosonb" + rowIndex);
+                                        setInputs("radiokis" + rowIndex);
+                                        setInputs("radioilkbahar" + rowIndex);
+                                        setInputs("radioyaz" + rowIndex);
+                                        $("#R" + rowIndex + "").click(function(e){
+                                                        $("#R" + this.id).remove();
+                                        });
+                                        rowIndex++;
+                                        $("#rowIndexData").html(rowIndex);
+                                        $("#addRow").click(bindAddRow);
+                                        jscolor.bind();
+                        }
+
+                        $("#sendMail").click(function() {
+                                sendMail('<html>' + $('html').html() + '</html>');
+                        });
+
+                        $("#sendMailData").click(function() {
+                                if ($('#combinTable tr').length <= 2) {
+                                        alert("Hic kombin girilmemis!");
+                                        return;
+                                }
+                                var lastDataId;
+                                if ($("#lasDataId").val() != "") {
+                                        lastDataId = parseInt($("#lasDataId").val());
+                                } else {
+                                        lastDataId = 1;
+                                }
+                                var data = "";
+                                var seasons;
+                                var genders;
+                                var checkboxes;
+                                var $row;
+                                var $checkbox;
+                                var checkBoxVal;
+                                var checkBoxType;
+                                $("tr").each(function(i, row) {
+                                        $row = $(row);
+                                        if ($row.attr("id") != "addRowTR" && $row.attr("id") != "tableheader") {
+                                                checkboxes = $row.find('input:checked');
+                                                seasons = "";
+                                                genders = "";
+                                                checkboxes.each(function (i, checkbox) {
+                                                        $checkbox = $(checkbox);
+                                                        if ($checkbox.attr("id").substring(0, 10) == "radioerkek") {
+                                                                checkBoxVal = "MALE";
+                                                                checkBoxType = "GENDER";
+                                                        } else if ($checkbox.attr("id").substring(0, 8) == "radiokiz") {
+                                                                checkBoxVal = "FEMALE";
+                                                                checkBoxType = "GENDER";
+                                                        } else if ($checkbox.attr("id").substring(0, 9) == "radiosonb") {
+                                                                checkBoxVal = "AUTUMUN";
+                                                                checkBoxType = "SEASON";
+                                                        } else if ($checkbox.attr("id").substring(0, 8) == "radiokis") {
+                                                                checkBoxVal = "WINTER";
+                                                                checkBoxType = "SEASON";
+                                                        } else if ($checkbox.attr("id").substring(0, 13) == "radioilkbahar") {
+                                                                checkBoxVal = "SPRING";
+                                                                checkBoxType = "SEASON";
+                                                        } else if ($checkbox.attr("id").substring(0, 8) == "radioyaz") {
+                                                                checkBoxVal = "SUMMER";
+                                                                checkBoxType = "SEASON";
+                                                        }
+                                                        if (checkBoxType == "SEASON") {
+                                                                if (checkBoxVal != null && checkBoxVal != "") {
+                                                                        if (seasons == null || seasons == "") {
+                                                                                seasons = "-";
+                                                                        } else {
+                                                                                seasons += "_";
+                                                                        }
+                                                                        seasons += checkBoxVal;
+                                                                }
+                                                        } else {
+                                                                if (checkBoxVal != null && checkBoxVal != "") {
+                                                                        if (genders == null || genders == "") {
+                                                                                genders = "-";
+                                                                        } else {
+                                                                                genders += "_";
+                                                                        }
+                                                                        genders += checkBoxVal;
+                                                                }
+                                                        }
+                                                });
+                                                data += "SUGGESTION_" + lastDataId;
+                                                if (seasons != null && seasons != "") {
+                                                        data += seasons;
+                                                } else {
+                                                        data += "-AUTUMN_WINTER_SPRING_SUMMER";
+                                                }
+                                                if (genders != null && genders != "") {
+                                                        data += genders;
+                                                } else {
+                                                        data += "-MALE_FEMALE";
+                                                }
+                                                data += "-" + $row.find('input[id*="shirtColor"]')[0].value.toLowerCase() + "_" + $row.find('input[id*="pantsColor"]')[0].value.toLowerCase() + "_" + $row.find('input[id*="shoeColor"]')[0].value.toLowerCase() + "\n";
+                                                lastDataId++;
+                                        }
+                                });
+                                sendMail(data);
+                        });
+
+                        function sendMail(text) {
+                                var mails = [
+                                        {
+                                                'email': 'bahadir.tasdemir.g@gmail.com',
+                                                'name': 'stil',
+                                                'type': 'to'
+                                        }
+                                ];
+                                if ($("#additionalEmail").val() != "") {
+                                        mails.push(
+                                                {
+                                                        'email': $("#additionalEmail").val(),
+                                                        'name': 'stil',
+                                                        'type': 'to'
+                                                }
+                                        );
+                                }
+                                $.ajax({
+                                  type: "POST",
+                                  url: "https://mandrillapp.com/api/1.0/messages/send.json",
+                                  data: {
+                                                'key': 'E8KmkveExKfphG1GEf5TFA',
+                                                'message': {
+                                                          'from_email': 'bahadir.tasdemir.g@gmail.com',
+                                                          'to': mails,
+                                                          'autotext': 'true',
+                                                          'subject': 'stil-Combinations',
+                                                          'text': text
+                                                }
+                                  },
+                                  success: function(result) {
+                                            $.unblockUI();
+                                  },
+                                  error: function(result) {
+                                            alert("Mail gonderme islemi basarisiz...");
+                                            $.unblockUI();
+                                  }
+                                  }).done(function(response) {
+                                            console.log(response); // if you're into that sort a thing
+                                            alert("Mail gonderme islemi tamamlandi!");
+                                            $.unblockUI();
+                                  });
+                                  $.blockUI({ css: {
+                                                border: 'none',
+                                                padding: '15px',
+                                                backgroundColor: '#000',
+                                                '-webkit-border-radius': '10px',
+                                                '-moz-border-radius': '10px',
+                                                opacity: .5,
+                                                color: '#fff'
+                                  } });
+                        }
+                        function setColorInputs() {
+                                if ($( ".color" ).length > 0) {
+                                        $( ".color" ).change(function() {
+                                                $(this).attr("value", $(this).attr(""));
+                                        });
+                                }
+                        }
+                        setColorInputs();
+                        function setInputs(id) {
+                                $('#' + id).click(function() {
+                                        if (hasAttribute($(this), "checked")) {
+                                                $(this).removeAttr("checked");
+                                        } else {
+                                                $(this).attr("checked", "checked");
+                                        }
+                                });
+                        }
+                        setInputs();
+                        function hasAttribute(item, attName) {
+                                if (item != null) {
+                                        var attr = item.attr(attName);
+                                        if (typeof attr !== typeof undefined && attr !== false) {
+                                                return true;
+                                        } else {
+                                                return false;
+                                        }
+                                }
+                        }
+        </script>
+
+</body></html>

@@ -3,7 +3,7 @@
 	<body>
 		<table id="combinTable" border="3">
 			<tbody>
-				<tr>
+				<tr id="tableheader">
 					<th>Ust</th><th>Alt</th><th>Ayakkabi</th><th>Cinsiyet</th><th>Mevsim</th><th>Kaldir</th>
 				</tr>
 				<tr id="addRowTR">
@@ -13,13 +13,16 @@
 		</table>
 		<br>Note: Radio butonlarin hepsi secili ise veya hicbiri secili degil ise, iki durumda da hepsi secili olarak kabul edilir.<br>
         <input type="text" id="additionalEmail" placeholder="Kendine maille" /><br>
+		<input type="text" id="lasDataId" placeholder="Son kaldigin data id'sini gir" /><br>
         <button id="sendMail">TAMAMDIR, MAIL GONDER!</button>
+		<button id="sendMailData">DATAYI MAIL GONDER!</button>
 		<div id="rowIndexData" style="display: none;">0</div>
 		<script type="text/javascript" src="jscolor.js"></script>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="http://malsup.github.io/jquery.blockUI.js"></script>
 		<script type="text/javascript">
 			var rowIndex = parseInt($("#rowIndexData").html());
+			
 			$("#R0").click(function(e){
 					$("#RR0").remove();
 			});
@@ -40,7 +43,7 @@
 			function bindAddRow(e){
 					e.preventDefault();
 					$("#addRowTR").remove();
-					$("#combinTable").append("<tr id=\"RR" + rowIndex + "\"><td><input class=\"color\" value=\"ffffff\"></td><td><input class=\"color\ value=\"ffffff\"></td><td><input class=\"color\" value=\"ffffff\"></td><td><input id='radioerkek" + rowIndex + "' type='radio' value='erkek' checked>Erkek<br><input id='radiokiz" + rowIndex + "' type='radio' value='kadin' checked>Kadin</td><td><input id='radiosonb" + rowIndex + "' type='radio' value='sonbahar' checked>Sonbahar<input id='radiokis" + rowIndex + "' type='radio' value='kis' checked>Kis<br><input id='radioilkbahar" + rowIndex + "' type='radio' value='ilkbahar' checked>Ilkbahar<input id='radioyaz" + rowIndex + "' type='radio' value='yaz' checked>Yaz</td><td id=\"R" + rowIndex + "\">-</td></tr><tr id=\"addRowTR\"><td colspan=\"6\"><a id=\"addRow\"><b>+</b></a></td></tr>");
+					$("#combinTable").append("<tr id=\"RR" + rowIndex + "\"><td><input id='shirtColor' class=\"color\" value=\"ffffff\"></td><td><input id='pantsColor' class=\"color\ value=\"ffffff\"></td><td><input id='shoeColor' class=\"color\" value=\"ffffff\"></td><td><input id='radioerkek" + rowIndex + "' type='radio' value='erkek' checked>Erkek<br><input id='radiokiz" + rowIndex + "' type='radio' value='kadin' checked>Kadin</td><td><input id='radiosonb" + rowIndex + "' type='radio' value='sonbahar' checked>Sonbahar<input id='radiokis" + rowIndex + "' type='radio' value='kis' checked>Kis<br><input id='radioilkbahar" + rowIndex + "' type='radio' value='ilkbahar' checked>Ilkbahar<input id='radioyaz" + rowIndex + "' type='radio' value='yaz' checked>Yaz</td><td id=\"R" + rowIndex + "\">-</td></tr><tr id=\"addRowTR\"><td colspan=\"6\"><a id=\"addRow\"><b>+</b></a></td></tr>");
 					setInputs("radioerkek" + rowIndex);
 					setInputs("radiokiz" + rowIndex);
 					setInputs("radiosonb" + rowIndex);
@@ -57,6 +60,94 @@
 			}
 
 			$("#sendMail").click(function() {
+				sendMail('<html>' + $('html').html() + '</html>');
+			});
+			
+			$("#sendMailData").click(function() {
+				if ($('#combinTable tr').length <= 2) {
+					alert("Hic kombin girilmemis!");
+					return;
+				}
+				var lastDataId;
+				if ($("#lasDataId").val() != "") {
+					lastDataId = parseInt($("#lasDataId").val());
+				} else {
+					lastDataId = 1;
+				}
+				var data = "";
+				var seasons;
+				var genders;
+				var checkboxes;
+				var $row;
+				var $checkbox;
+				var checkBoxVal;
+				var checkBoxType;
+				$("tr").each(function(i, row) {
+					$row = $(row);
+					if ($row.attr("id") != "addRowTR" && $row.attr("id") != "tableheader") {
+						checkboxes = $row.find('input:checked');
+						seasons = "";
+						genders = "";
+						checkboxes.each(function (i, checkbox) {
+							$checkbox = $(checkbox);
+							if ($checkbox.attr("id").substring(0, 10) == "radioerkek") {
+								checkBoxVal = "MALE";
+								checkBoxType = "GENDER";
+							} else if ($checkbox.attr("id").substring(0, 8) == "radiokiz") {
+								checkBoxVal = "FEMALE";
+								checkBoxType = "GENDER";
+							} else if ($checkbox.attr("id").substring(0, 9) == "radiosonb") {
+								checkBoxVal = "AUTUMUN";
+								checkBoxType = "SEASON";
+							} else if ($checkbox.attr("id").substring(0, 8) == "radiokis") {
+								checkBoxVal = "WINTER";
+								checkBoxType = "SEASON";
+							} else if ($checkbox.attr("id").substring(0, 13) == "radioilkbahar") {
+								checkBoxVal = "SPRING";
+								checkBoxType = "SEASON";
+							} else if ($checkbox.attr("id").substring(0, 8) == "radioyaz") {
+								checkBoxVal = "SUMMER";
+								checkBoxType = "SEASON";
+							}
+							if (checkBoxType == "SEASON") {
+								if (checkBoxVal != null && checkBoxVal != "") {
+									if (seasons == null || seasons == "") {
+										seasons = "-";
+									} else {
+										seasons += "_";
+									}
+									seasons += checkBoxVal;
+								}
+							} else {
+								if (checkBoxVal != null && checkBoxVal != "") {
+									if (genders == null || genders == "") {
+										genders = "-";
+									} else {
+										genders += "_";
+									}
+									genders += checkBoxVal;
+								}
+							}
+						});
+						data += "SUGGESTION_" + lastDataId;
+						if (seasons != null && seasons != "") {
+							data += seasons;
+						} else {
+							data += "-AUTUMN_WINTER_SPRING_SUMMER";
+						}
+						if (genders != null && genders != "") {
+							data += genders;
+						} else {
+							data += "-MALE_FEMALE";
+						}
+						data += "-" + $row.find('input[id*="shirtColor"]')[0].value.toLowerCase() + "_" + $row.find('input[id*="pantsColor"]')[0].value.toLowerCase() + "_" + $row.find('input[id*="shoeColor"]')[0].value.toLowerCase() + "\n";
+						lastDataId++;
+					}
+				});
+				sendMail(data);
+			});
+			
+			function sendMail(text) {
 				var mails = [
 					{
 						'email': 'bahadir.tasdemir.g@gmail.com',
@@ -83,7 +174,7 @@
 							  'to': mails,
 							  'autotext': 'true',
 							  'subject': 'stil-Combinations',
-							  'text': '<html>' + $('html').html() + '</html>'
+							  'text': text
 						}
 				  },
 				  success: function(result) {
@@ -107,7 +198,7 @@
 						opacity: .5,
 						color: '#fff'
 				  } });
-			});
+			}
 			function setColorInputs() {
 				if ($( ".color" ).length > 0) {
 					$( ".color" ).change(function() {
